@@ -1,0 +1,28 @@
+<!DOCTYPE generatorConfiguration PUBLIC
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+    <context id="Mysql" targetRuntime="MyBatis3DynamicSql">
+        <!-- 序列化 -->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+        <!-- 自动生成equals方法和hashcode方法 -->
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
+        <!-- 添加toString() -->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://192.168.1.10:10002/base"
+                        userId="root"
+                        password="root"
+        />
+
+        <javaModelGenerator targetPackage="manager.model" targetProject="src/main/java"/>
+        <javaClientGenerator targetPackage="manager.mapper" targetProject="src/main/java"/>
+
+        <table tableName="tb_info_menu"/>
+        <table tableName="tb_info_role"/>
+        <table tableName="tb_info_manager"/>
+        <table tableName="tb_relation_menu_role"/>
+    </context>
+</generatorConfiguration>
