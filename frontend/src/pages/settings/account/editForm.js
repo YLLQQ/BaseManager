@@ -3,7 +3,7 @@ import { connect } from 'dva';
 import React, { useState, useLayoutEffect, useEffect } from 'react';
 import { formItemLayout } from '@/utils/const';
 import CryptoJS from 'crypto-js';
-import { updateManagerPassword, getManagerById, addManager } from '@/services/account';
+import { updateManager, getManagerById, addManager } from '@/services/account';
 import { roleManagerList } from "@/services/role";
 
 const typeMap = new Map([
@@ -84,7 +84,7 @@ function EditForm(props, ref) {
       let pormise = addManager;
 
       if (type === 'edit') {
-        pormise = updateManagerPassword;
+        pormise = updateManager;
       }
 
       pormise({

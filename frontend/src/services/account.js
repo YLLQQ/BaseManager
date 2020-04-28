@@ -7,7 +7,7 @@ export async function addManager(params) {
   });
 }
 
-export async function updateManagerPassword(params) {
+export async function updateManager(params) {
   return request('/manager/update', {
     method: 'POST',
     data: params,
