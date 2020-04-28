@@ -150,7 +150,7 @@ function EditForm(props, ref) {
           {getFieldDecorator('password', {
             rules: [
               { message: '请输入密码' },
-              { validator: compareToFirstPassword },
+              { validator: validateToNextPassword },
               { required: type === 'add', message: '必填' }
             ],
           })(<Input type="password" />)}
