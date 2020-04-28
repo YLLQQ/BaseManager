@@ -1,7 +1,7 @@
 import { router } from 'umi';
 import { getPageQuery, setSessionStorage } from '@/utils';
 import { stringify } from 'querystring';
-import { accountLogin } from '@/services/login';
+import { accountLogin } from '@/services/account';
 import Base64  from 'base-64';
  
 export default {

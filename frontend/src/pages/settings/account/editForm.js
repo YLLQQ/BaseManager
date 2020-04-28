@@ -1,12 +1,10 @@
-import { Form, Input, Modal, Radio, Col, Row } from 'antd';
+import { Form, Input, Modal, Select } from 'antd';
 import { connect } from 'dva';
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState, useLayoutEffect, useEffect } from 'react';
 import { formItemLayout } from '@/utils/const';
-import Upload from '@/components/Upload';
 import CryptoJS from 'crypto-js';
-import { updateManagerPassword, getManagerById } from '@/services/account';
-
-import styles from './editForm.less';
+import { updateManagerPassword, getManagerById, addManager } from '@/services/account';
+import { roleManagerList } from "@/services/role";
 
 const typeMap = new Map([
   ['watch', '查看'],
@@ -31,6 +29,13 @@ function EditForm(props, ref) {
   const { record, type = 'add' } = editItem || {};
 
   const [disabled, setdisabled] = useState(false);
+  const [roleList, setRoleList] = useState([]);
+
+  useEffect(() => {
+    roleManagerList().then(res => {
+      setRoleList(res.result)
+    })
+  }, []);
 
   useLayoutEffect(() => {
     if (!record) {
@@ -41,13 +46,13 @@ function EditForm(props, ref) {
         id,
         loginName,
         roleName,
-        companyName,
+        roleId
       } = res.result || {};
       const formData = {
         id,
         loginName,
         roleName,
-        companyName,
+        roleId
       };
       switch (type) {
         case 'edit':
@@ -76,8 +81,12 @@ function EditForm(props, ref) {
         return false;
       }
 
-      let pormise = updateManagerPassword;
-      
+      let pormise = addManager;
+
+      if (type === 'edit') {
+        pormise = updateManagerPassword;
+      }
+
       pormise({
         ...values,
         password:
@@ -126,19 +135,16 @@ function EditForm(props, ref) {
           </Form.Item>
         )}
         <Form.Item label="登录账户">
-          {getFieldDecorator('loginName', {
-            rules: [{ required: true, message: '必填' }],
-          })(<Input disabled={true} />)}
+          {getFieldDecorator('loginName', { rules: [{ required: true, message: '必填' }], })(<Input />)}
         </Form.Item>
         <Form.Item label="角色">
-          {getFieldDecorator('roleName', {
-            rules: [{ required: true, message: '必填' }],
-          })(<Input disabled={true} />)}
-        </Form.Item>
-        <Form.Item label="公司">
-          {getFieldDecorator('companyName', {
-            rules: [{ required: true, message: '必填' }],
-          })(<Input disabled={true} />)}
+          {getFieldDecorator('roleId', { rules: [{ required: true, message: '必填' }], })(
+            <Select style={{ width: 200 }} disabled={!roleList}>
+              {
+                roleList.map(item => <Select.Option key={item.id} value={item.id}>{item.roleName}</Select.Option>)
+              }
+            </Select>
+          )}
         </Form.Item>
         <Form.Item label="登录密码">
           {getFieldDecorator('password', {

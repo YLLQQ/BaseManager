@@ -36,9 +36,6 @@ export default {
     },
     *getAllMenuIdListByRoleId({ payload }, { put, call }) {
       return yield call(getAllMenuIdListByRoleId, payload);
-      // if (res.result) {
-      //   yield put({ type: 'setMenuInfo', payload: res.result });
-      // }
     },
     *getAllMenuInfoListWithLoginManagerId({ payload }, { put, call }) {
       const res = yield call(getAllMenuInfoListWithLoginManagerId, payload);

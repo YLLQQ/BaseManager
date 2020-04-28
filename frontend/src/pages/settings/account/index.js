@@ -1,8 +1,5 @@
-import React, { useState, useRef } from 'react';
-import { Form, Input, Button, Select } from 'antd';
-import { connect } from 'dva';
-import { tabelFormLayout } from '@/utils/const';
-import { momentFormat } from '@/utils';
+import React, { useState } from 'react';
+import { Button } from 'antd';
 import EditForm from './editForm';
 import Table from '@/components/Table/AutoTable';
 import { allManagerWithPage } from '@/services/account';
@@ -23,7 +20,6 @@ function Index(props) {
         setVisible(false);
         setEditItem(null);
     }
-
 
     const columns = [
         {
@@ -47,7 +43,7 @@ function Index(props) {
                             size="small"
                             onClick={openModal.bind(null, { record, type: 'edit' })}
                         >
-                            修改密码
+                            修改
                         </Button>
                     </div>
                 );
@@ -57,6 +53,9 @@ function Index(props) {
 
     return (
         <div>
+            <Button type="primary" onClick={openModal.bind(null, 'add')}>
+                新增
+            </Button>
             <Table
                 interFace={allManagerWithPage}
                 columns={columns}
