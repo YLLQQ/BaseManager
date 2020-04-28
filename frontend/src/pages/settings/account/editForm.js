@@ -149,23 +149,20 @@ function EditForm(props, ref) {
         <Form.Item label="登录密码">
           {getFieldDecorator('password', {
             rules: [
-              {
-                validator: validateToNextPassword,
-              },
+              { message: '请输入密码' },
+              { validator: compareToFirstPassword },
+              { required: type === 'add', message: '必填' }
             ],
-          })(<Input type="password" disabled={disabled} />)}
+          })(<Input type="password" />)}
         </Form.Item>
         <Form.Item label="再次输入密码">
           {getFieldDecorator('confirm', {
             rules: [
-              {
-                message: '请再次输入密码',
-              },
-              {
-                validator: compareToFirstPassword,
-              },
+              { message: '请再次输入密码' },
+              { validator: compareToFirstPassword },
+              { required: type === 'add', message: '必填' }
             ],
-          })(<Input type="password" disabled={disabled} />)}
+          })(<Input type="password" />)}
         </Form.Item>
       </Form>
     </Modal>

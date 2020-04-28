@@ -1,3 +1,9 @@
+drop schema if exists base;
+
+create schema base collate utf8_unicode_ci;
+
+use base;
+
 ## 菜单信息表
 CREATE TABLE `tb_info_menu`
 (
