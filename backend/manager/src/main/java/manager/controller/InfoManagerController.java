@@ -5,9 +5,9 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import manager.common.annotation.IgnoreToken;
 import manager.common.model.PageModel;
+import manager.dto.InfoManagerDTO;
 import manager.interactive.manager.GetManagerInfoByPasswordRequest;
 import manager.interactive.manager.UpdateManagerPasswordRequest;
-import manager.model.TbInfoManager;
 import manager.service.InfoManagerService;
 import manager.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,18 +32,18 @@ public class InfoManagerController {
 		@NotNull Integer managerId = request.getId();
 		@NotEmpty String password = request.getPassword();
 
-		return managerInfoService.updatePassword(managerId, password);
+		return managerInfoService.update(managerId, password);
 	}
 
 	@ApiOperation("通过编号获取账户信息")
 	@GetMapping("/manager/info/{managerId}")
-	public TbInfoManager getById(@PathVariable("managerId") int managerId) {
+	public InfoManagerDTO getById(@PathVariable("managerId") int managerId) {
 		return managerInfoService.getById(managerId);
 	}
 
 	@ApiOperation("分页获取账户信息")
 	@GetMapping("/manager/info/all")
-	public PageModel<TbInfoManager> getAllWithPage(@RequestParam("page") int page, @RequestParam("size") int size) {
+	public PageModel<InfoManagerDTO> getAllWithPage(@RequestParam("page") int page, @RequestParam("size") int size) {
 		return managerInfoService.getAllWithPage(page, size);
 	}
 
@@ -54,9 +54,7 @@ public class InfoManagerController {
 		@NotBlank String loginName = request.getLoginName();
 		String password = request.getPassword();
 
-		log.debug("current encode password is {}", password);
-
-		TbInfoManager managerInfo = managerInfoService.getManagerInfoByPassword(loginName, password);
+		InfoManagerDTO managerInfo = managerInfoService.getManagerInfoByPassword(loginName, password);
 
 		return TokenUtil.signWithJwt(managerInfo);
 	}

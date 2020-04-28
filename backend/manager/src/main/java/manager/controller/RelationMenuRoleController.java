@@ -1,12 +1,12 @@
 package manager.controller;
 
-import manager.interactive.role.UpdateRoleMenuRequest;
-import manager.model.TbRelationMenuRole;
-import manager.service.InfoMenuService;
-import manager.service.RelationMenuRoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import manager.interactive.relation.UpdateRoleMenuRequest;
+import manager.model.TbRelationMenuRole;
+import manager.service.InfoMenuService;
+import manager.service.RelationMenuRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,7 +28,6 @@ public class RelationMenuRoleController {
 	@ApiOperation("通过角色ID获取角色关联的底级菜单列表")
 	@GetMapping("/relation/allMenuId/{roleId}")
 	public List<Integer> getAllMenuIdByRoleId(@PathVariable("roleId") Integer roleId) {
-
 		return relationMenuRoleService.getAllMenuIdByRoleId(roleId);
 	}
 
@@ -48,8 +47,8 @@ public class RelationMenuRoleController {
 		reduceList.forEach(id -> {
 			TbRelationMenuRole tbRelationMenuRole = new TbRelationMenuRole();
 
-			tbRelationMenuRole.setManagerRoleId(roleId);
-			tbRelationMenuRole.setConfigMenuId(id);
+			tbRelationMenuRole.setRoleId(roleId);
+			tbRelationMenuRole.setMenuId(id);
 
 			menuRoleList.add(tbRelationMenuRole);
 		});

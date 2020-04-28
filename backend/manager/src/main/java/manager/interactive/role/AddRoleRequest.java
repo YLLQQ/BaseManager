@@ -8,8 +8,8 @@ import javax.validation.constraints.NotEmpty;
  * @author yangguoqing
  */
 @Data
-public class AddRoleManagerRequest {
+public class AddRoleRequest {
 
 	@NotEmpty
-	private String managerRoleName;
+	private String roleName;
 }

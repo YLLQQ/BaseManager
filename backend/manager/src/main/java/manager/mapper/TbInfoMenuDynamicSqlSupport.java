@@ -7,31 +7,31 @@ import org.mybatis.dynamic.sql.SqlColumn;
 import org.mybatis.dynamic.sql.SqlTable;
 
 public final class TbInfoMenuDynamicSqlSupport {
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-27T16:05:45.503+08:00", comments="Source Table: tb_info_menu")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.926+08:00", comments="Source Table: tb_info_menu")
     public static final TbInfoMenu tbInfoMenu = new TbInfoMenu();
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-27T16:05:45.503+08:00", comments="Source field: tb_info_menu.id")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.926+08:00", comments="Source field: tb_info_menu.id")
     public static final SqlColumn<Integer> id = tbInfoMenu.id;
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-27T16:05:45.503+08:00", comments="Source field: tb_info_menu.menu_name")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.926+08:00", comments="Source field: tb_info_menu.menu_name")
     public static final SqlColumn<String> menuName = tbInfoMenu.menuName;
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-27T16:05:45.503+08:00", comments="Source field: tb_info_menu.parent_menu_id")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.926+08:00", comments="Source field: tb_info_menu.parent_menu_id")
     public static final SqlColumn<Integer> parentMenuId = tbInfoMenu.parentMenuId;
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-27T16:05:45.503+08:00", comments="Source field: tb_info_menu.menu_icon_path")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.926+08:00", comments="Source field: tb_info_menu.menu_icon_path")
     public static final SqlColumn<String> menuIconPath = tbInfoMenu.menuIconPath;
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-27T16:05:45.504+08:00", comments="Source field: tb_info_menu.menu_link_path")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.926+08:00", comments="Source field: tb_info_menu.menu_link_path")
     public static final SqlColumn<String> menuLinkPath = tbInfoMenu.menuLinkPath;
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-27T16:05:45.504+08:00", comments="Source field: tb_info_menu.create_time")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.926+08:00", comments="Source field: tb_info_menu.create_time")
     public static final SqlColumn<Date> createTime = tbInfoMenu.createTime;
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-27T16:05:45.504+08:00", comments="Source field: tb_info_menu.last_update_time")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.926+08:00", comments="Source field: tb_info_menu.last_update_time")
     public static final SqlColumn<Date> lastUpdateTime = tbInfoMenu.lastUpdateTime;
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-27T16:05:45.503+08:00", comments="Source Table: tb_info_menu")
+    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.926+08:00", comments="Source Table: tb_info_menu")
     public static final class TbInfoMenu extends SqlTable {
         public final SqlColumn<Integer> id = column("id", JDBCType.INTEGER);
 

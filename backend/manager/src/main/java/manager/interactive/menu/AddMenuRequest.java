@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
  * @author yangguoqing
  */
 @Data
-public class AddMenuInfoRequest {
+public class AddMenuRequest {
 
 	@NotNull
 	private Integer parentMenuId;

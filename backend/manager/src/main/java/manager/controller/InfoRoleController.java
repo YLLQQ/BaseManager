@@ -3,8 +3,9 @@ package manager.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import manager.interactive.role.AddRoleManagerRequest;
-import manager.model.TbInfoRole;
+import manager.dto.InfoRoleDTO;
+import manager.interactive.role.AddRoleRequest;
+import manager.interactive.role.UpdateRoleRequest;
 import manager.service.InfoRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -30,19 +33,26 @@ public class InfoRoleController {
 		this.infoRoleService = infoRoleService;
 	}
 
-	@ApiOperation("新增角色名称")
-	@PostMapping("/role/manager/add")
-	public boolean addRoleManagerWithCheck(@Valid @RequestBody AddRoleManagerRequest request) {
-		TbInfoRole tbInfoRole = new TbInfoRole();
+	@ApiOperation("修改角色")
+	@PostMapping("/role/update")
+	public boolean update(@Valid @RequestBody UpdateRoleRequest request) {
+		@NotNull Integer id = request.getId();
+		@NotEmpty String roleName = request.getRoleName();
 
-		tbInfoRole.setRoleName(request.getManagerRoleName());
+		return infoRoleService.update(id, roleName);
+	}
 
-		return infoRoleService.add(tbInfoRole) > 1;
+	@ApiOperation("新增角色")
+	@PostMapping("/role/add")
+	public boolean add(@Valid @RequestBody AddRoleRequest request) {
+		@NotEmpty String roleName = request.getRoleName();
+
+		return infoRoleService.add(roleName);
 	}
 
 	@ApiOperation("获取系统所有的角色信息")
-	@GetMapping("/role/manager/all")
-	public List<TbInfoRole> getAll() {
+	@GetMapping("/role/all")
+	public List<InfoRoleDTO> getAll() {
 		return infoRoleService.getAll();
 	}
 }

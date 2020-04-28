@@ -6,11 +6,13 @@ import org.mybatis.dynamic.sql.render.RenderingStrategies;
 import org.mybatis.dynamic.sql.select.render.SelectStatementProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import self.unity.tool.util.CollectionUtil;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static manager.mapper.TbRelationMenuRoleDynamicSqlSupport.*;
+import static manager.response.ManagerCodeEnum.RELATION_MENU_ROLE_NOT_EXISTS;
 import static org.mybatis.dynamic.sql.SqlBuilder.isEqualTo;
 import static org.mybatis.dynamic.sql.select.SelectDSL.selectDistinct;
 
@@ -20,19 +22,23 @@ import static org.mybatis.dynamic.sql.select.SelectDSL.selectDistinct;
 @Service
 public class RelationMenuRoleService {
 
-	public List<Integer> getAllMenuIdByRoleId(Integer roleId) {
+	private static final Integer RELATION_UP = 1;
+
+	public List<Integer> getAllMenuIdByRoleId(Integer iRoleId) {
 		SelectStatementProvider selectStatementProvider =
-				selectDistinct(configMenuId)
+				selectDistinct(menuId)
 						.from(tbRelationMenuRole)
-						.where(managerRoleId, isEqualTo(roleId))
-						.and(relationUp, isEqualTo(1))
+						.where(roleId, isEqualTo(iRoleId))
+						.and(relationUp, isEqualTo(RELATION_UP))
 						.build()
 						.render(RenderingStrategies.MYBATIS3);
 
 		List<TbRelationMenuRole> tbInfoMenus = tbRelationMenuRoleMapper.selectMany(selectStatementProvider);
 
+		CollectionUtil.collectionIsNotEmpty(tbInfoMenus, RELATION_MENU_ROLE_NOT_EXISTS);
+
 		List<Integer> menuIdList =
-				tbInfoMenus.stream().map(item -> item.getConfigMenuId()).collect(Collectors.toList());
+				tbInfoMenus.stream().map(item -> item.getMenuId()).collect(Collectors.toList());
 
 		return menuIdList;
 	}

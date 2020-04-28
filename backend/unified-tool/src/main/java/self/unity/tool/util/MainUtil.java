@@ -15,6 +15,10 @@ import java.io.InputStreamReader;
  */
 public class MainUtil {
 
+	public static boolean insertOrUpdateSuccess(int row) {
+		return row > 0;
+	}
+
 	/**
 	 * 输入流转换为字符串
 	 *

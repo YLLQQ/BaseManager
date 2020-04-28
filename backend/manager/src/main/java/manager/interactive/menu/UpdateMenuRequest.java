@@ -1,21 +1,23 @@
-package manager.interactive.role;
+package manager.interactive.menu;
 
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 /**
  * @author yangguoqing
  */
 @Data
-public class UpdateRoleMenuRequest {
+public class UpdateMenuRequest {
 
 	@NotNull
 	private Integer id;
 
-	@NotEmpty.List({})
-	private List<Integer> menuIdList;
+	@NotEmpty
+	private String menuName;
 
+	private String menuIconPath;
+
+	private String menuLinkPath;
 }

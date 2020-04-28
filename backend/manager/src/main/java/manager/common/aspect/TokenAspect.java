@@ -5,6 +5,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import lombok.extern.slf4j.Slf4j;
 import manager.common.annotation.IgnoreToken;
+import manager.response.ManagerCodeEnum;
 import manager.util.TokenUtil;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
@@ -17,7 +18,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import self.unity.response.enums.UnifiedResponseCodeEnum;
 import self.unity.response.exception.UnifiedInteractiveException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -62,7 +62,7 @@ public class TokenAspect {
 		}
 
 		if (StringUtils.isEmpty(authorization)) {
-			throw new UnifiedInteractiveException(UnifiedResponseCodeEnum.TOKEN_GET_FAIL);
+			throw new UnifiedInteractiveException(ManagerCodeEnum.TOKEN_GET_FAIL);
 		}
 
 		TokenUtil.verifyToken(authorization);

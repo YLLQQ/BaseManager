@@ -8,8 +8,8 @@ import com.auth0.jwt.exceptions.*;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.JWTVerifier;
 import com.auth0.jwt.interfaces.Verification;
+import manager.response.ManagerCodeEnum;
 import org.springframework.util.StringUtils;
-import self.unity.response.enums.UnifiedResponseCodeEnum;
 import self.unity.response.exception.UnifiedInteractiveException;
 
 import java.sql.Date;
@@ -33,8 +33,8 @@ public class TokenUtil {
 
 	public static void verifyToken(String token) {
 
-		if (StringUtils.isEmpty(token)){
-			throw new UnifiedInteractiveException(UnifiedResponseCodeEnum.TOKEN_GET_FAIL);
+		if (StringUtils.isEmpty(token)) {
+			throw new UnifiedInteractiveException(ManagerCodeEnum.TOKEN_GET_FAIL);
 		}
 
 		try {
@@ -46,20 +46,20 @@ public class TokenUtil {
 			verifier.verify(token);
 		} catch (JWTVerificationException exception) {
 			if (exception instanceof JWTDecodeException) {
-				throw new UnifiedInteractiveException(UnifiedResponseCodeEnum.TOKEN_DECODED_FAIL);
+				throw new UnifiedInteractiveException(ManagerCodeEnum.TOKEN_DECODED_FAIL);
 			}
 
 			if (exception instanceof SignatureVerificationException) {
-				throw new UnifiedInteractiveException(UnifiedResponseCodeEnum.TOKEN_SIGNATURE_VERIFICATION_FAIL);
+				throw new UnifiedInteractiveException(ManagerCodeEnum.TOKEN_SIGNATURE_VERIFICATION_FAIL);
 			}
 
 			if (exception instanceof TokenExpiredException) {
-				throw new UnifiedInteractiveException(UnifiedResponseCodeEnum.TOKEN_EXPIRED);
+				throw new UnifiedInteractiveException(ManagerCodeEnum.TOKEN_EXPIRED);
 			}
 
 			exception.printStackTrace();
 
-			throw new UnifiedInteractiveException(UnifiedResponseCodeEnum.TOKEN_VERIFY_NOT_PASS);
+			throw new UnifiedInteractiveException(ManagerCodeEnum.TOKEN_VERIFY_NOT_PASS);
 		}
 	}
 
@@ -72,7 +72,7 @@ public class TokenUtil {
 		} catch (JWTCreationException exception) {
 			exception.printStackTrace();
 
-			throw new UnifiedInteractiveException(UnifiedResponseCodeEnum.TOKEN_CREATE_FAIL);
+			throw new UnifiedInteractiveException(ManagerCodeEnum.TOKEN_CREATE_FAIL);
 		}
 	}
 }

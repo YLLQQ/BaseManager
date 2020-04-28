@@ -1,14 +1,12 @@
 package manager.controller;
 
-import manager.dto.InfoMenuDTO;
-import manager.interactive.menu.AddMenuInfoRequest;
-import manager.interactive.menu.UpdateMenuInfoRequest;
-import manager.model.TbInfoMenu;
-import manager.service.InfoMenuService;
-import self.unity.tool.util.BeanCopierUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import manager.dto.InfoMenuDTO;
+import manager.interactive.menu.AddMenuRequest;
+import manager.interactive.menu.UpdateMenuRequest;
+import manager.service.InfoMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 /**
@@ -28,7 +28,7 @@ import java.util.Set;
 public class InfoMenuController {
 
 	@ApiOperation("获取角色下所有菜单")
-	@GetMapping("/menu/list")
+	@GetMapping("/menu/all/role")
 	public Set<InfoMenuDTO> packAllMenuByRoleId(HttpServletRequest request) {
 		Integer roleId = Integer.valueOf(request.getAttribute("roleId").toString());
 
@@ -43,38 +43,24 @@ public class InfoMenuController {
 
 	@ApiOperation("编辑菜单信息")
 	@PostMapping("/menu/update")
-	public boolean updateMenuInfo(@Valid @RequestBody UpdateMenuInfoRequest request) {
-		TbInfoMenu tbInfoMenu = new TbInfoMenu();
+	public boolean updateMenuInfo(@Valid @RequestBody UpdateMenuRequest request) {
+		@NotNull Integer id = request.getId();
+		String menuIconPath = request.getMenuIconPath();
+		String menuLinkPath = request.getMenuLinkPath();
+		@NotEmpty String menuName = request.getMenuName();
 
-		BeanCopierUtil.copyS2T(request, tbInfoMenu);
-
-		int i = menuInfoService.updateMenuInfoById(tbInfoMenu);
-
-		if (log.isDebugEnabled()) {
-			log.debug("[ update menu, result is [{}] ]", i);
-		}
-
-		return i > 0;
+		return menuInfoService.update(id, menuName, null, menuIconPath, menuLinkPath);
 	}
 
 	@ApiOperation("新增菜单信息")
 	@PostMapping("/menu/add")
-	public boolean addMenuInfo(@Valid @RequestBody AddMenuInfoRequest request) {
-		TbInfoMenu tbInfoMenu = new TbInfoMenu();
+	public boolean addMenuInfo(@Valid @RequestBody AddMenuRequest request) {
+		@NotEmpty String menuName = request.getMenuName();
+		String menuIconPath = request.getMenuIconPath();
+		String menuLinkPath = request.getMenuLinkPath();
+		@NotNull Integer parentMenuId = request.getParentMenuId();
 
-		BeanCopierUtil.copyS2T(request, tbInfoMenu);
-
-		if (log.isDebugEnabled()) {
-			log.debug("[ add menu, request is [{}], and tbInfoMenu is [{}]]", request, tbInfoMenu);
-		}
-
-		int i = menuInfoService.addMenuInfo(tbInfoMenu);
-
-		if (log.isDebugEnabled()) {
-			log.debug("[ add menu, result is [{}] ]", i);
-		}
-
-		return i > 0;
+		return menuInfoService.add(menuName, parentMenuId, menuIconPath, menuLinkPath);
 	}
 
 	private InfoMenuService menuInfoService;

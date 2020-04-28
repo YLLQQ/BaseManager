@@ -3,16 +3,20 @@ package manager.service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import manager.common.model.PageModel;
+import manager.dto.InfoManagerDTO;
+import manager.dto.InfoRoleDTO;
 import manager.mapper.TbInfoManagerMapper;
 import manager.model.TbInfoManager;
-import manager.model.TbInfoRole;
+import manager.response.ManagerCodeEnum;
 import manager.util.EncryptUtil;
 import org.mybatis.dynamic.sql.render.RenderingStrategies;
 import org.mybatis.dynamic.sql.select.render.SelectStatementProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import self.unity.response.enums.UnifiedResponseCodeEnum;
 import self.unity.response.exception.UnifiedInteractiveException;
+import self.unity.tool.util.BeanCopierUtil;
+import self.unity.tool.util.CollectionUtil;
+import self.unity.tool.util.MainUtil;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,42 +31,37 @@ import static org.mybatis.dynamic.sql.select.SelectDSL.select;
 @Service
 public class InfoManagerService {
 
-	public boolean updatePassword(Integer managerId, String password) {
-		password = EncryptUtil.md5(password);
-
-		TbInfoManager tbInfoManager = new TbInfoManager();
-
-		tbInfoManager.setId(managerId);
-		tbInfoManager.setLoginPassword(password);
-
-		return tbInfoManagerMapper.updateByPrimaryKeySelective(tbInfoManager) > 0;
-	}
-
-	public TbInfoManager getById(Integer managerId) {
-		SelectStatementProvider selectStatementProvider = select(id, loginName, roleId, companyId)
+	public InfoManagerDTO getById(Integer managerId) {
+		SelectStatementProvider selectStatementProvider = select(id, loginName, roleId)
 				.from(tbInfoManager)
 				.where(id, isEqualTo(managerId))
 				.build()
 				.render(RenderingStrategies.MYBATIS3);
 
-		TbInfoManager infoManager = tbInfoManagerMapper.selectOne(selectStatementProvider).get();
+		Optional<TbInfoManager> tbInfoManager = tbInfoManagerMapper.selectOne(selectStatementProvider);
 
-		TbInfoRole role = infoRoleService.getById(infoManager.getRoleId());
+		TbInfoManager infoManager =
+				tbInfoManager.orElseThrow(() -> new UnifiedInteractiveException(ManagerCodeEnum.MANAGER_INFO_NOT_EXISTS));
 
-		infoManager.setRoleName(role.getRoleName());
+		InfoRoleDTO role = infoRoleService.getById(infoManager.getRoleId());
 
-		return infoManager;
+		InfoManagerDTO infoManagerDTO = BeanCopierUtil.copyS2T(infoManager, InfoManagerDTO.class);
+
+		infoManagerDTO.setRoleName(role.getRoleName());
+
+		return infoManagerDTO;
 	}
 
-	public PageModel<TbInfoManager> getAllWithPage(int page, int size) {
+	public PageModel<InfoManagerDTO> getAllWithPage(int page, int size) {
 		PageHelper.startPage(page, size);
 
 		List<TbInfoManager> list = getAll();
 
 		PageInfo<TbInfoManager> pageInfo = new PageInfo<>(list);
-		PageModel<TbInfoManager> pageModel = new PageModel<>();
 
-		pageModel.setList(list);
+		PageModel<InfoManagerDTO> pageModel = new PageModel<>();
+
+		pageModel.setList(BeanCopierUtil.copyS2TList(list, InfoManagerDTO.class));
 		pageModel.setTotal(pageInfo.getTotal());
 		pageModel.setPageNum(pageInfo.getPageNum());
 		pageModel.setPageSize(size);
@@ -71,41 +70,63 @@ public class InfoManagerService {
 	}
 
 	public List<TbInfoManager> getAll() {
-		SelectStatementProvider selectStatementProvider = select(id, loginName, roleId, companyId)
+		SelectStatementProvider selectStatementProvider = select(id, loginName, roleId)
 				.from(tbInfoManager)
 				.build()
 				.render(RenderingStrategies.MYBATIS3);
 
-		return tbInfoManagerMapper.selectMany(selectStatementProvider);
+		List<TbInfoManager> tbInfoManagers = tbInfoManagerMapper.selectMany(selectStatementProvider);
+
+		CollectionUtil.collectionIsNotEmpty(tbInfoManagers, ManagerCodeEnum.MANAGER_INFO_LIST_MISSING);
+
+		return tbInfoManagers;
 	}
 
-	public boolean add(TbInfoManager tbInfoManager) {
-		tbInfoManager.setLoginPassword(EncryptUtil.md5(tbInfoManager.getLoginPassword()));
-
-		return tbInfoManagerMapper.insertSelective(tbInfoManager) > 0;
-	}
-
-	/**
-	 * 通过登录名和密码获取管理员信息
-	 *
-	 * @param iLoginName
-	 * @param password
-	 *
-	 * @return
-	 */
-	public TbInfoManager getManagerInfoByPassword(String iLoginName, String password) {
+	public InfoManagerDTO getManagerInfoByPassword(String iLoginName, String password) {
 		password = EncryptUtil.md5(password);
 
-		SelectStatementProvider selectStatementProvider = select(id, loginName, roleId, companyId)
+		SelectStatementProvider selectStatementProvider = select(id, loginName, roleId)
 				.from(tbInfoManager)
 				.where(loginName, isEqualTo(iLoginName))
 				.and(loginPassword, isEqualTo(password))
 				.build()
 				.render(RenderingStrategies.MYBATIS3);
 
-		Optional<TbInfoManager> tbInfoManager = tbInfoManagerMapper.selectOne(selectStatementProvider);
+		TbInfoManager tbInfoManager =
+				tbInfoManagerMapper
+						.selectOne(selectStatementProvider)
+						.orElseThrow(() -> new UnifiedInteractiveException(ManagerCodeEnum.MANAGER_INFO_NOT_EXISTS_WITH_PASSWORD));
 
-		return tbInfoManager.orElseThrow(() -> new UnifiedInteractiveException(UnifiedResponseCodeEnum.MANAGER_INFO_NOT_EXISTS_WITH_PASSWORD));
+		return BeanCopierUtil.copyS2T(tbInfoManager, InfoManagerDTO.class);
+	}
+
+	public boolean update(Integer managerId, String password) {
+		return update(managerId, password, null, null);
+	}
+
+	public boolean update(Integer managerId, String password, String loginName, Integer roleId) {
+		TbInfoManager tbInfoManager = new TbInfoManager();
+
+		tbInfoManager.setId(managerId);
+		tbInfoManager.setLoginPassword(password);
+		tbInfoManager.setLoginName(loginName);
+		tbInfoManager.setRoleId(roleId);
+
+		int row = tbInfoManagerMapper.updateByPrimaryKeySelective(tbInfoManager);
+
+		return MainUtil.insertOrUpdateSuccess(row);
+	}
+
+	public boolean add(String loginName, String loginPassword, Integer roleId) {
+		TbInfoManager tbInfoManager = new TbInfoManager();
+
+		tbInfoManager.setLoginName(loginName);
+		tbInfoManager.setLoginPassword(loginPassword);
+		tbInfoManager.setRoleId(roleId);
+
+		int row = tbInfoManagerMapper.insertSelective(tbInfoManager);
+
+		return MainUtil.insertOrUpdateSuccess(row);
 	}
 
 	private InfoRoleService infoRoleService;

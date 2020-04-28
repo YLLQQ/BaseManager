@@ -3,20 +3,28 @@ package manager.service;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import lombok.extern.slf4j.Slf4j;
 import manager.dto.InfoMenuDTO;
 import manager.mapper.TbInfoMenuMapper;
 import manager.model.TbInfoMenu;
-import self.unity.tool.util.BeanCopierUtil;
-import lombok.extern.slf4j.Slf4j;
 import org.mybatis.dynamic.sql.render.RenderingStrategies;
 import org.mybatis.dynamic.sql.select.render.SelectStatementProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import self.unity.response.exception.UnifiedInteractiveException;
+import self.unity.tool.util.BeanCopierUtil;
+import self.unity.tool.util.CollectionUtil;
+import self.unity.tool.util.MainUtil;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static manager.mapper.TbInfoMenuDynamicSqlSupport.*;
+import static manager.response.ManagerCodeEnum.MENU_INFO_LIST_MISSING;
+import static manager.response.ManagerCodeEnum.MENU_INFO_NOT_EXISTS;
 import static org.mybatis.dynamic.sql.select.SelectDSL.select;
 import static org.mybatis.dynamic.sql.select.SelectDSL.selectDistinct;
 
@@ -58,8 +66,13 @@ public class InfoMenuService {
 		return pack(tbInfoMenus);
 	}
 
-	public Optional<TbInfoMenu> getTbMenuInfoById(Integer id) {
-		return tbMenuInfoMapper.selectByPrimaryKey(id);
+	public InfoMenuDTO getById(Integer id) {
+		TbInfoMenu tbInfoMenu =
+				tbMenuInfoMapper
+						.selectByPrimaryKey(id)
+						.orElseThrow(() -> new UnifiedInteractiveException(MENU_INFO_NOT_EXISTS));
+
+		return BeanCopierUtil.copyS2T(tbInfoMenu, InfoMenuDTO.class);
 	}
 
 	public List<Integer> getAllParentId() {
@@ -102,8 +115,8 @@ public class InfoMenuService {
 				continue;
 			}
 
-			for (InfoMenuDTO secondtLevelMenu : secondLevelMenus) {
-				Integer secondLevelId = secondtLevelMenu.getId();
+			for (InfoMenuDTO secondLevelMenu : secondLevelMenus) {
+				Integer secondLevelId = secondLevelMenu.getId();
 
 				Set<InfoMenuDTO> thirdLevelMenus = multiMap.get(secondLevelId);
 
@@ -112,7 +125,7 @@ public class InfoMenuService {
 					continue;
 				}
 
-				secondtLevelMenu.setChildren(thirdLevelMenus);
+				secondLevelMenu.setChildren(thirdLevelMenus);
 			}
 
 			infoMenu.setChildren(secondLevelMenus);
@@ -127,15 +140,39 @@ public class InfoMenuService {
 						.from(tbInfoMenu).build()
 						.render(RenderingStrategies.MYBATIS3);
 
-		return tbMenuInfoMapper.selectMany(selectStatementProvider);
+		List<TbInfoMenu> tbInfoMenus = tbMenuInfoMapper.selectMany(selectStatementProvider);
+
+		CollectionUtil.collectionIsNotEmpty(tbInfoMenus, MENU_INFO_LIST_MISSING);
+
+		return tbInfoMenus;
 	}
 
-	public int addMenuInfo(TbInfoMenu tbInfoMenu) {
-		return tbMenuInfoMapper.insertSelective(tbInfoMenu);
+	public boolean add(String menuName, Integer parentMenuId, String menuIconPath, String menuLinkPath) {
+		TbInfoMenu tbInfoMenu = new TbInfoMenu();
+
+		tbInfoMenu.setMenuIconPath(menuIconPath);
+		tbInfoMenu.setMenuLinkPath(menuLinkPath);
+		tbInfoMenu.setMenuName(menuName);
+		tbInfoMenu.setParentMenuId(parentMenuId);
+
+		int row = tbMenuInfoMapper.insertSelective(tbInfoMenu);
+
+		return MainUtil.insertOrUpdateSuccess(row);
 	}
 
-	public int updateMenuInfoById(TbInfoMenu tbInfoMenu) {
-		return tbMenuInfoMapper.updateByPrimaryKeySelective(tbInfoMenu);
+	public boolean update(Integer id, String menuName, Integer parentMenuId, String menuIconPath,
+						  String menuLinkPath) {
+		TbInfoMenu tbInfoMenu = new TbInfoMenu();
+
+		tbInfoMenu.setId(id);
+		tbInfoMenu.setMenuIconPath(menuIconPath);
+		tbInfoMenu.setMenuLinkPath(menuLinkPath);
+		tbInfoMenu.setMenuName(menuName);
+		tbInfoMenu.setParentMenuId(parentMenuId);
+
+		int row = tbMenuInfoMapper.updateByPrimaryKeySelective(tbInfoMenu);
+
+		return MainUtil.insertOrUpdateSuccess(row);
 	}
 
 	private RelationMenuRoleService relationMenuRoleService;
