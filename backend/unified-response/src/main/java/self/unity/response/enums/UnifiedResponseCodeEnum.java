@@ -19,6 +19,11 @@ public enum UnifiedResponseCodeEnum implements UnifiedResponseInter {
 	HTTP_CLIENT_NOT_WORK(9100, "请求客户端异常"),
 	HTTP_MESSAGE_NOT_READABLE(9101, "请求体读入失败"),
 
+	SQL_SYNTAX_ERROR(9799,"SQL语法错误"),
+
+	MYBATIS_REFLECTION_ERROR(9898, "入库映射字段错误"),
+	MYBATIS_REFLECTION(9899, "Mybatis处理异常"),
+
 	SYSTEM_UNIQUE_KEY_EXISTS(9996, "唯一键已存在"),
 	SYSTEM_ATTRIBUTE_MUST_HAVE_VALUE(9997, "强制标识字段未设置"),
 	SYSTEM_GET_VALUE_IS_NULL(9998, "该次请求获取数据为空"),

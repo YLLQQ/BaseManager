@@ -34,31 +34,31 @@ import org.mybatis.dynamic.sql.util.mybatis3.MyBatis3Utils;
 
 @Mapper
 public interface TbInfoRoleMapper {
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.932+08:00", comments="Source Table: tb_info_role")
+
     BasicColumn[] selectList = BasicColumn.columnList(id, roleName, createTime, lastUpdateTime);
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.931+08:00", comments="Source Table: tb_info_role")
+
     @SelectProvider(type=SqlProviderAdapter.class, method="select")
     long count(SelectStatementProvider selectStatement);
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.931+08:00", comments="Source Table: tb_info_role")
+
     @DeleteProvider(type=SqlProviderAdapter.class, method="delete")
     int delete(DeleteStatementProvider deleteStatement);
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.931+08:00", comments="Source Table: tb_info_role")
+
     @InsertProvider(type=SqlProviderAdapter.class, method="insert")
     int insert(InsertStatementProvider<TbInfoRole> insertStatement);
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.931+08:00", comments="Source Table: tb_info_role")
+
     @InsertProvider(type=SqlProviderAdapter.class, method="insertMultiple")
     int insertMultiple(MultiRowInsertStatementProvider<TbInfoRole> multipleInsertStatement);
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.931+08:00", comments="Source Table: tb_info_role")
+
     @SelectProvider(type=SqlProviderAdapter.class, method="select")
     @ResultMap("TbInfoRoleResult")
     Optional<TbInfoRole> selectOne(SelectStatementProvider selectStatement);
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.931+08:00", comments="Source Table: tb_info_role")
+
     @SelectProvider(type=SqlProviderAdapter.class, method="select")
     @Results(id="TbInfoRoleResult", value = {
             @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
@@ -68,28 +68,28 @@ public interface TbInfoRoleMapper {
     })
     List<TbInfoRole> selectMany(SelectStatementProvider selectStatement);
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.931+08:00", comments="Source Table: tb_info_role")
+
     @UpdateProvider(type=SqlProviderAdapter.class, method="update")
     int update(UpdateStatementProvider updateStatement);
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.932+08:00", comments="Source Table: tb_info_role")
+
     default long count(CountDSLCompleter completer) {
         return MyBatis3Utils.countFrom(this::count, tbInfoRole, completer);
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.932+08:00", comments="Source Table: tb_info_role")
+
     default int delete(DeleteDSLCompleter completer) {
         return MyBatis3Utils.deleteFrom(this::delete, tbInfoRole, completer);
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.932+08:00", comments="Source Table: tb_info_role")
+
     default int deleteByPrimaryKey(Integer id_) {
         return delete(c ->
                 c.where(id, isEqualTo(id_))
         );
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.932+08:00", comments="Source Table: tb_info_role")
+
     default int insert(TbInfoRole record) {
         return MyBatis3Utils.insert(this::insert, record, tbInfoRole, c ->
                 c.map(id).toProperty("id")
@@ -99,7 +99,7 @@ public interface TbInfoRoleMapper {
         );
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.932+08:00", comments="Source Table: tb_info_role")
+
     default int insertMultiple(Collection<TbInfoRole> records) {
         return MyBatis3Utils.insertMultiple(this::insertMultiple, records, tbInfoRole, c ->
                 c.map(id).toProperty("id")
@@ -109,7 +109,7 @@ public interface TbInfoRoleMapper {
         );
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.932+08:00", comments="Source Table: tb_info_role")
+
     default int insertSelective(TbInfoRole record) {
         return MyBatis3Utils.insert(this::insert, record, tbInfoRole, c ->
                 c.map(id).toPropertyWhenPresent("id", record::getId)
@@ -119,34 +119,34 @@ public interface TbInfoRoleMapper {
         );
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.932+08:00", comments="Source Table: tb_info_role")
+
     default Optional<TbInfoRole> selectOne(SelectDSLCompleter completer) {
         return MyBatis3Utils.selectOne(this::selectOne, selectList, tbInfoRole, completer);
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.932+08:00", comments="Source Table: tb_info_role")
+
     default List<TbInfoRole> select(SelectDSLCompleter completer) {
         return MyBatis3Utils.selectList(this::selectMany, selectList, tbInfoRole, completer);
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.932+08:00", comments="Source Table: tb_info_role")
+
     default List<TbInfoRole> selectDistinct(SelectDSLCompleter completer) {
         return MyBatis3Utils.selectDistinct(this::selectMany, selectList, tbInfoRole, completer);
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.932+08:00", comments="Source Table: tb_info_role")
+
     default Optional<TbInfoRole> selectByPrimaryKey(Integer id_) {
         return selectOne(c ->
                 c.where(id, isEqualTo(id_))
         );
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.932+08:00", comments="Source Table: tb_info_role")
+
     default int update(UpdateDSLCompleter completer) {
         return MyBatis3Utils.update(this::update, tbInfoRole, completer);
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.933+08:00", comments="Source Table: tb_info_role")
+
     static UpdateDSL<UpdateModel> updateAllColumns(TbInfoRole record, UpdateDSL<UpdateModel> dsl) {
         return dsl.set(id).equalTo(record::getId)
                 .set(roleName).equalTo(record::getRoleName)
@@ -154,7 +154,7 @@ public interface TbInfoRoleMapper {
                 .set(lastUpdateTime).equalTo(record::getLastUpdateTime);
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.933+08:00", comments="Source Table: tb_info_role")
+
     static UpdateDSL<UpdateModel> updateSelectiveColumns(TbInfoRole record, UpdateDSL<UpdateModel> dsl) {
         return dsl.set(id).equalToWhenPresent(record::getId)
                 .set(roleName).equalToWhenPresent(record::getRoleName)
@@ -162,7 +162,7 @@ public interface TbInfoRoleMapper {
                 .set(lastUpdateTime).equalToWhenPresent(record::getLastUpdateTime);
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.933+08:00", comments="Source Table: tb_info_role")
+
     default int updateByPrimaryKey(TbInfoRole record) {
         return update(c ->
                 c.set(roleName).equalTo(record::getRoleName)
@@ -172,7 +172,7 @@ public interface TbInfoRoleMapper {
         );
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.933+08:00", comments="Source Table: tb_info_role")
+
     default int updateByPrimaryKeySelective(TbInfoRole record) {
         return update(c ->
                 c.set(roleName).equalToWhenPresent(record::getRoleName)

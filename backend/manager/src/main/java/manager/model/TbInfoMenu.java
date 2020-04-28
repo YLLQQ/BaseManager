@@ -5,102 +5,102 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class TbInfoMenu implements Serializable {
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.924+08:00", comments="Source field: tb_info_menu.id")
+
     private Integer id;
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.924+08:00", comments="Source field: tb_info_menu.menu_name")
+
     private String menuName;
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.924+08:00", comments="Source field: tb_info_menu.parent_menu_id")
+
     private Integer parentMenuId;
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.924+08:00", comments="Source field: tb_info_menu.menu_icon_path")
+
     private String menuIconPath;
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.925+08:00", comments="Source field: tb_info_menu.menu_link_path")
+
     private String menuLinkPath;
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.925+08:00", comments="Source field: tb_info_menu.create_time")
+
     private Date createTime;
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.925+08:00", comments="Source field: tb_info_menu.last_update_time")
+
     private Date lastUpdateTime;
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.925+08:00", comments="Source Table: tb_info_menu")
+
     private static final long serialVersionUID = 1L;
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.924+08:00", comments="Source field: tb_info_menu.id")
+
     public Integer getId() {
         return id;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.924+08:00", comments="Source field: tb_info_menu.id")
+
     public void setId(Integer id) {
         this.id = id;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.924+08:00", comments="Source field: tb_info_menu.menu_name")
+
     public String getMenuName() {
         return menuName;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.924+08:00", comments="Source field: tb_info_menu.menu_name")
+
     public void setMenuName(String menuName) {
         this.menuName = menuName;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.924+08:00", comments="Source field: tb_info_menu.parent_menu_id")
+
     public Integer getParentMenuId() {
         return parentMenuId;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.924+08:00", comments="Source field: tb_info_menu.parent_menu_id")
+
     public void setParentMenuId(Integer parentMenuId) {
         this.parentMenuId = parentMenuId;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.924+08:00", comments="Source field: tb_info_menu.menu_icon_path")
+
     public String getMenuIconPath() {
         return menuIconPath;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.924+08:00", comments="Source field: tb_info_menu.menu_icon_path")
+
     public void setMenuIconPath(String menuIconPath) {
         this.menuIconPath = menuIconPath;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.925+08:00", comments="Source field: tb_info_menu.menu_link_path")
+
     public String getMenuLinkPath() {
         return menuLinkPath;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.925+08:00", comments="Source field: tb_info_menu.menu_link_path")
+
     public void setMenuLinkPath(String menuLinkPath) {
         this.menuLinkPath = menuLinkPath;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.925+08:00", comments="Source field: tb_info_menu.create_time")
+
     public Date getCreateTime() {
         return createTime;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.925+08:00", comments="Source field: tb_info_menu.create_time")
+
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.925+08:00", comments="Source field: tb_info_menu.last_update_time")
+
     public Date getLastUpdateTime() {
         return lastUpdateTime;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.925+08:00", comments="Source field: tb_info_menu.last_update_time")
+
     public void setLastUpdateTime(Date lastUpdateTime) {
         this.lastUpdateTime = lastUpdateTime;
     }
 
     @Override
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.925+08:00", comments="Source Table: tb_info_menu")
+
     public boolean equals(Object that) {
         if (this == that) {
             return true;
@@ -122,7 +122,7 @@ public class TbInfoMenu implements Serializable {
     }
 
     @Override
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.925+08:00", comments="Source Table: tb_info_menu")
+
     public int hashCode() {
         final int prime = 31;
         int result = 1;
@@ -137,7 +137,7 @@ public class TbInfoMenu implements Serializable {
     }
 
     @Override
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.925+08:00", comments="Source Table: tb_info_menu")
+
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(getClass().getSimpleName());

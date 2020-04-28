@@ -1,0 +1,12 @@
+.container{
+  display: flex;
+  flex-direction: row;
+  flex: auto;
+  height: 100vh;
+}
+.body-wrapper{
+  margin: 20px 10px 10px;
+  padding: 20px;
+  background: #fff;
+  height: 100%;
+}

@@ -1,0 +1,23 @@
+.container{
+  flex: 0 0 200px;
+  max-width: 200px;
+  min-width: 200px;
+  width: 200px;
+  background: #001529;
+  transition: all .2s;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 6px rgba(0,21,41,.35);
+  z-index: 10;
+
+  &.collapsed{
+    flex: 0 0 80px;
+    max-width: 80px;
+    min-width: 80px;
+    width: 80px;
+  }
+
+  .iconName{
+    height: 64px;
+  }
+}

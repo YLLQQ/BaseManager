@@ -1,21 +1,7 @@
 package manager.mapper;
 
-import static manager.mapper.TbInfoMenuDynamicSqlSupport.*;
-import static org.mybatis.dynamic.sql.SqlBuilder.*;
-
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
-import javax.annotation.Generated;
 import manager.model.TbInfoMenu;
-import org.apache.ibatis.annotations.DeleteProvider;
-import org.apache.ibatis.annotations.InsertProvider;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.SelectProvider;
-import org.apache.ibatis.annotations.UpdateProvider;
+import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
 import org.mybatis.dynamic.sql.BasicColumn;
 import org.mybatis.dynamic.sql.delete.DeleteDSLCompleter;
@@ -32,33 +18,40 @@ import org.mybatis.dynamic.sql.update.render.UpdateStatementProvider;
 import org.mybatis.dynamic.sql.util.SqlProviderAdapter;
 import org.mybatis.dynamic.sql.util.mybatis3.MyBatis3Utils;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+
+import static manager.mapper.TbInfoMenuDynamicSqlSupport.*;
+import static org.mybatis.dynamic.sql.SqlBuilder.isEqualTo;
+
 @Mapper
 public interface TbInfoMenuMapper {
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.928+08:00", comments="Source Table: tb_info_menu")
+
     BasicColumn[] selectList = BasicColumn.columnList(id, menuName, parentMenuId, menuIconPath, menuLinkPath, createTime, lastUpdateTime);
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.926+08:00", comments="Source Table: tb_info_menu")
+
     @SelectProvider(type=SqlProviderAdapter.class, method="select")
     long count(SelectStatementProvider selectStatement);
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.926+08:00", comments="Source Table: tb_info_menu")
+
     @DeleteProvider(type=SqlProviderAdapter.class, method="delete")
     int delete(DeleteStatementProvider deleteStatement);
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.926+08:00", comments="Source Table: tb_info_menu")
+
     @InsertProvider(type=SqlProviderAdapter.class, method="insert")
     int insert(InsertStatementProvider<TbInfoMenu> insertStatement);
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.927+08:00", comments="Source Table: tb_info_menu")
+
     @InsertProvider(type=SqlProviderAdapter.class, method="insertMultiple")
     int insertMultiple(MultiRowInsertStatementProvider<TbInfoMenu> multipleInsertStatement);
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.927+08:00", comments="Source Table: tb_info_menu")
+
     @SelectProvider(type=SqlProviderAdapter.class, method="select")
     @ResultMap("TbInfoMenuResult")
     Optional<TbInfoMenu> selectOne(SelectStatementProvider selectStatement);
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.927+08:00", comments="Source Table: tb_info_menu")
+
     @SelectProvider(type=SqlProviderAdapter.class, method="select")
     @Results(id="TbInfoMenuResult", value = {
             @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
@@ -71,28 +64,28 @@ public interface TbInfoMenuMapper {
     })
     List<TbInfoMenu> selectMany(SelectStatementProvider selectStatement);
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.927+08:00", comments="Source Table: tb_info_menu")
+
     @UpdateProvider(type=SqlProviderAdapter.class, method="update")
     int update(UpdateStatementProvider updateStatement);
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.927+08:00", comments="Source Table: tb_info_menu")
+
     default long count(CountDSLCompleter completer) {
         return MyBatis3Utils.countFrom(this::count, tbInfoMenu, completer);
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.927+08:00", comments="Source Table: tb_info_menu")
+
     default int delete(DeleteDSLCompleter completer) {
         return MyBatis3Utils.deleteFrom(this::delete, tbInfoMenu, completer);
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.927+08:00", comments="Source Table: tb_info_menu")
+
     default int deleteByPrimaryKey(Integer id_) {
         return delete(c ->
                 c.where(id, isEqualTo(id_))
         );
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.927+08:00", comments="Source Table: tb_info_menu")
+
     default int insert(TbInfoMenu record) {
         return MyBatis3Utils.insert(this::insert, record, tbInfoMenu, c ->
                 c.map(id).toProperty("id")
@@ -105,7 +98,7 @@ public interface TbInfoMenuMapper {
         );
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.927+08:00", comments="Source Table: tb_info_menu")
+
     default int insertMultiple(Collection<TbInfoMenu> records) {
         return MyBatis3Utils.insertMultiple(this::insertMultiple, records, tbInfoMenu, c ->
                 c.map(id).toProperty("id")
@@ -118,7 +111,7 @@ public interface TbInfoMenuMapper {
         );
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.927+08:00", comments="Source Table: tb_info_menu")
+
     default int insertSelective(TbInfoMenu record) {
         return MyBatis3Utils.insert(this::insert, record, tbInfoMenu, c ->
                 c.map(id).toPropertyWhenPresent("id", record::getId)
@@ -131,34 +124,34 @@ public interface TbInfoMenuMapper {
         );
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.928+08:00", comments="Source Table: tb_info_menu")
+
     default Optional<TbInfoMenu> selectOne(SelectDSLCompleter completer) {
         return MyBatis3Utils.selectOne(this::selectOne, selectList, tbInfoMenu, completer);
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.928+08:00", comments="Source Table: tb_info_menu")
+
     default List<TbInfoMenu> select(SelectDSLCompleter completer) {
         return MyBatis3Utils.selectList(this::selectMany, selectList, tbInfoMenu, completer);
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.928+08:00", comments="Source Table: tb_info_menu")
+
     default List<TbInfoMenu> selectDistinct(SelectDSLCompleter completer) {
         return MyBatis3Utils.selectDistinct(this::selectMany, selectList, tbInfoMenu, completer);
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.928+08:00", comments="Source Table: tb_info_menu")
+
     default Optional<TbInfoMenu> selectByPrimaryKey(Integer id_) {
         return selectOne(c ->
                 c.where(id, isEqualTo(id_))
         );
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.928+08:00", comments="Source Table: tb_info_menu")
+
     default int update(UpdateDSLCompleter completer) {
         return MyBatis3Utils.update(this::update, tbInfoMenu, completer);
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.928+08:00", comments="Source Table: tb_info_menu")
+
     static UpdateDSL<UpdateModel> updateAllColumns(TbInfoMenu record, UpdateDSL<UpdateModel> dsl) {
         return dsl.set(id).equalTo(record::getId)
                 .set(menuName).equalTo(record::getMenuName)
@@ -169,7 +162,7 @@ public interface TbInfoMenuMapper {
                 .set(lastUpdateTime).equalTo(record::getLastUpdateTime);
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.928+08:00", comments="Source Table: tb_info_menu")
+
     static UpdateDSL<UpdateModel> updateSelectiveColumns(TbInfoMenu record, UpdateDSL<UpdateModel> dsl) {
         return dsl.set(id).equalToWhenPresent(record::getId)
                 .set(menuName).equalToWhenPresent(record::getMenuName)
@@ -180,7 +173,7 @@ public interface TbInfoMenuMapper {
                 .set(lastUpdateTime).equalToWhenPresent(record::getLastUpdateTime);
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.928+08:00", comments="Source Table: tb_info_menu")
+
     default int updateByPrimaryKey(TbInfoMenu record) {
         return update(c ->
                 c.set(menuName).equalTo(record::getMenuName)
@@ -193,7 +186,7 @@ public interface TbInfoMenuMapper {
         );
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.929+08:00", comments="Source Table: tb_info_menu")
+
     default int updateByPrimaryKeySelective(TbInfoMenu record) {
         return update(c ->
                 c.set(menuName).equalToWhenPresent(record::getMenuName)

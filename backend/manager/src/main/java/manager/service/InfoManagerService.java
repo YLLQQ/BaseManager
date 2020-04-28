@@ -18,6 +18,7 @@ import self.unity.tool.util.BeanCopierUtil;
 import self.unity.tool.util.CollectionUtil;
 import self.unity.tool.util.MainUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -61,7 +62,19 @@ public class InfoManagerService {
 
 		PageModel<InfoManagerDTO> pageModel = new PageModel<>();
 
-		pageModel.setList(BeanCopierUtil.copyS2TList(list, InfoManagerDTO.class));
+		ArrayList<InfoManagerDTO> infoManagerDTOList = new ArrayList<InfoManagerDTO>(list.size());
+
+
+		for (TbInfoManager infoManager : list) {
+			InfoRoleDTO role = infoRoleService.getById(infoManager.getRoleId());
+			InfoManagerDTO infoManagerDTO = BeanCopierUtil.copyS2T(infoManager, InfoManagerDTO.class);
+
+			infoManagerDTO.setRoleName(role.getRoleName());
+
+			infoManagerDTOList.add(infoManagerDTO);
+		}
+
+		pageModel.setList(infoManagerDTOList);
 		pageModel.setTotal(pageInfo.getTotal());
 		pageModel.setPageNum(pageInfo.getPageNum());
 		pageModel.setPageSize(size);

@@ -2,114 +2,90 @@ package manager.model;
 
 import manager.util.EncryptUtil;
 
-import javax.annotation.Generated;
 import java.io.Serializable;
 import java.util.Date;
 
 public class TbInfoManager implements Serializable {
-	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2020-04-28T09:59:51.939+08:00", comments
-            = "Source field: tb_info_manager.id")
+
 	private Integer id;
 
-	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2020-04-28T09:59:51.939+08:00", comments
-            = "Source field: tb_info_manager.login_name")
 	private String loginName;
 
-	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2020-04-28T09:59:51.939+08:00", comments
-            = "Source field: tb_info_manager.login_password")
 	private String loginPassword;
 
-	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2020-04-28T09:59:51.94+08:00", comments =
-            "Source field: tb_info_manager.role_id")
+
 	private Integer roleId;
 
-	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2020-04-28T09:59:51.94+08:00", comments =
-            "Source field: tb_info_manager.create_time")
+
 	private Date createTime;
 
-	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2020-04-28T09:59:51.94+08:00", comments =
-            "Source field: tb_info_manager.last_update_time")
+
 	private Date lastUpdateTime;
 
-	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2020-04-28T09:59:51.94+08:00", comments =
-            "Source Table: tb_info_manager")
+
 	private static final long serialVersionUID = 1L;
 
-	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2020-04-28T09:59:51.939+08:00", comments
-            = "Source field: tb_info_manager.id")
+
 	public Integer getId() {
 		return id;
 	}
 
-	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2020-04-28T09:59:51.939+08:00", comments
-            = "Source field: tb_info_manager.id")
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2020-04-28T09:59:51.939+08:00", comments
-            = "Source field: tb_info_manager.login_name")
+
 	public String getLoginName() {
 		return loginName;
 	}
 
-	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2020-04-28T09:59:51.939+08:00", comments
-            = "Source field: tb_info_manager.login_name")
+
 	public void setLoginName(String loginName) {
 		this.loginName = loginName;
 	}
 
-	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2020-04-28T09:59:51.94+08:00", comments =
-            "Source field: tb_info_manager.login_password")
+
 	public String getLoginPassword() {
 		return loginPassword;
 	}
 
-	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2020-04-28T09:59:51.94+08:00", comments =
-            "Source field: tb_info_manager.login_password")
+
 	public void setLoginPassword(String loginPassword) {
 		this.loginPassword = EncryptUtil.md5(loginPassword);
 	}
 
-	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2020-04-28T09:59:51.94+08:00", comments =
-            "Source field: tb_info_manager.role_id")
+
 	public Integer getRoleId() {
 		return roleId;
 	}
 
-	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2020-04-28T09:59:51.94+08:00", comments =
-            "Source field: tb_info_manager.role_id")
+
 	public void setRoleId(Integer roleId) {
 		this.roleId = roleId;
 	}
 
-	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2020-04-28T09:59:51.94+08:00", comments =
-            "Source field: tb_info_manager.create_time")
+
 	public Date getCreateTime() {
 		return createTime;
 	}
 
-	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2020-04-28T09:59:51.94+08:00", comments =
-            "Source field: tb_info_manager.create_time")
+
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
 
-	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2020-04-28T09:59:51.94+08:00", comments =
-            "Source field: tb_info_manager.last_update_time")
+
 	public Date getLastUpdateTime() {
 		return lastUpdateTime;
 	}
 
-	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2020-04-28T09:59:51.94+08:00", comments =
-            "Source field: tb_info_manager.last_update_time")
+
 	public void setLastUpdateTime(Date lastUpdateTime) {
 		this.lastUpdateTime = lastUpdateTime;
 	}
 
 	@Override
-	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2020-04-28T09:59:51.94+08:00", comments =
-            "Source Table: tb_info_manager")
 	public boolean equals(Object that) {
 		if (this == that) {
 			return true;
@@ -123,19 +99,17 @@ public class TbInfoManager implements Serializable {
 		TbInfoManager other = (TbInfoManager) that;
 		return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
 				&& (this.getLoginName() == null ? other.getLoginName() == null :
-                this.getLoginName().equals(other.getLoginName()))
+				this.getLoginName().equals(other.getLoginName()))
 				&& (this.getLoginPassword() == null ? other.getLoginPassword() == null :
-                this.getLoginPassword().equals(other.getLoginPassword()))
+				this.getLoginPassword().equals(other.getLoginPassword()))
 				&& (this.getRoleId() == null ? other.getRoleId() == null : this.getRoleId().equals(other.getRoleId()))
 				&& (this.getCreateTime() == null ? other.getCreateTime() == null :
-                this.getCreateTime().equals(other.getCreateTime()))
+				this.getCreateTime().equals(other.getCreateTime()))
 				&& (this.getLastUpdateTime() == null ? other.getLastUpdateTime() == null :
-                this.getLastUpdateTime().equals(other.getLastUpdateTime()));
+				this.getLastUpdateTime().equals(other.getLastUpdateTime()));
 	}
 
 	@Override
-	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2020-04-28T09:59:51.94+08:00", comments =
-            "Source Table: tb_info_manager")
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -149,8 +123,6 @@ public class TbInfoManager implements Serializable {
 	}
 
 	@Override
-	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2020-04-28T09:59:51.94+08:00", comments =
-            "Source Table: tb_info_manager")
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(getClass().getSimpleName());

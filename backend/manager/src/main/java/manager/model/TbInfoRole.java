@@ -5,63 +5,63 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class TbInfoRole implements Serializable {
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.929+08:00", comments="Source field: tb_info_role.id")
+
     private Integer id;
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.929+08:00", comments="Source field: tb_info_role.role_name")
+
     private String roleName;
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.929+08:00", comments="Source field: tb_info_role.create_time")
+
     private Date createTime;
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.929+08:00", comments="Source field: tb_info_role.last_update_time")
+
     private Date lastUpdateTime;
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.93+08:00", comments="Source Table: tb_info_role")
+
     private static final long serialVersionUID = 1L;
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.929+08:00", comments="Source field: tb_info_role.id")
+
     public Integer getId() {
         return id;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.929+08:00", comments="Source field: tb_info_role.id")
+
     public void setId(Integer id) {
         this.id = id;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.929+08:00", comments="Source field: tb_info_role.role_name")
+
     public String getRoleName() {
         return roleName;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.929+08:00", comments="Source field: tb_info_role.role_name")
+
     public void setRoleName(String roleName) {
         this.roleName = roleName;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.929+08:00", comments="Source field: tb_info_role.create_time")
+
     public Date getCreateTime() {
         return createTime;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.929+08:00", comments="Source field: tb_info_role.create_time")
+
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.929+08:00", comments="Source field: tb_info_role.last_update_time")
+
     public Date getLastUpdateTime() {
         return lastUpdateTime;
     }
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.929+08:00", comments="Source field: tb_info_role.last_update_time")
+
     public void setLastUpdateTime(Date lastUpdateTime) {
         this.lastUpdateTime = lastUpdateTime;
     }
 
     @Override
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.93+08:00", comments="Source Table: tb_info_role")
+
     public boolean equals(Object that) {
         if (this == that) {
             return true;
@@ -80,7 +80,7 @@ public class TbInfoRole implements Serializable {
     }
 
     @Override
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.93+08:00", comments="Source Table: tb_info_role")
+
     public int hashCode() {
         final int prime = 31;
         int result = 1;
@@ -92,7 +92,7 @@ public class TbInfoRole implements Serializable {
     }
 
     @Override
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2020-04-28T09:59:51.93+08:00", comments="Source Table: tb_info_role")
+
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(getClass().getSimpleName());
