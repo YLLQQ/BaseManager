@@ -1,0 +1,39 @@
+## 配置信息表
+id，编号
+config_key，配置关键字
+config_content，配置内容
+create_time，创建时间
+last_update_time，最近更新时间
+
+AREA_TYPE [{typeId:1,typeName:合作方拉取专区}]
+
+## 专区信息表
+id，编号
+area_name，专区名称
+area_type，专区类型（1，合作方拉取专区）
+area_status，专区状态（1，上架；2，下架）
+create_time，创建时间
+last_update_time，最近更新时间
+
+## 专区图书配置关系表
+id，关系编号
+area_id，专区编号
+book_id，图书编号
+max_open_chapter_count，最大开放章节数 （0，全部开放，默认）
+create_time，创建时间
+last_update_time，最近更新时间
+
+## 合作方信息表
+id，合作方编号
+cooperation_name，合作方名称
+pull_key，合作方接入密钥（系统直接生成）
+remark，合作方备注
+create_time，创建时间
+last_update_time，最近更新时间
+
+## 合作方专区关系表
+id，关系编号
+cooperation_id，合作方编号
+area_id，专区编号
+create_time，创建时间
+last_update_time，最近更新时间
